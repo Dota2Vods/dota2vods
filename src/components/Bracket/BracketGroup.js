@@ -52,11 +52,11 @@ export default class BracketGroup extends Component {
                     <div className="horizontal-connector" />
                     <div className="vertical-connector" />
                     <div className="match">
-                        <div>
+                        <div data-tbd={team1 === "TBD"}>
                             {team1}
                             <span>{score[0]}</span>
                         </div>
-                        <div>
+                        <div data-tbd={team2 === "TBD"}>
                             {team2}
                             <span>{score[1]}</span>
                         </div>

@@ -47,6 +47,11 @@ $line-color: black;
 
             @include match-style;
 
+            > div[data-tbd="true"] {
+                font-style: italic;
+                opacity: 0.5;
+            }
+
             > div > span {
                 float: right;
                 margin-left: 5px;
