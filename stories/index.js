@@ -17,7 +17,9 @@ storiesOf('Bracket', module)
                 team2: "Liquid",
                 score: [1, 2],
                 done: true
-            }
+            },
+            score: [0, 0],
+            done: false
         };
 
         return <Bracket bracket={bracketData} />
@@ -36,7 +38,9 @@ storiesOf('Bracket', module)
                     team2: "Liquid",
                     score: [1, 2],
                     done: true
-                }
+                },
+                score: [0, 0],
+                done: false
             },
             separated: true,
             team2: {
@@ -44,7 +48,9 @@ storiesOf('Bracket', module)
                 team2: "The greks",
                 score: [0, 2],
                 done: true
-            }
+            },
+            score: [0, 0],
+            done: false
         };
 
         return <Bracket bracket={bracketData} />
@@ -63,7 +69,9 @@ storiesOf('Bracket', module)
                     team2: "Liquid",
                     score: [1, 2],
                     done: true
-                }
+                },
+                score: [0, 0],
+                done: false
             },
             separated: true,
             team2: {
@@ -78,8 +86,12 @@ storiesOf('Bracket', module)
                     team2: "Boys in blue",
                     score: [1, 2],
                     done: true
-                }
-            }
+                },
+                score: [0, 0],
+                done: false
+            },
+            score: [0, 0],
+            done: false
         };
 
         return <Bracket bracket={bracketData} />

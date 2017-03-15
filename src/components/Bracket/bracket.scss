@@ -40,6 +40,11 @@ $line-color: black;
             padding: 3px;
 
             @include match-style;
+
+            > div > span {
+                float: right;
+                margin-left: 5px;
+            }
         }
     }
 }

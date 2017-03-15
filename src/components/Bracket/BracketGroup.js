@@ -19,6 +19,7 @@ function findTeamName(round) {
 export default class BracketGroup extends Component {
     render() {
         const bracket = this.props.bracket;
+        const score = bracket.score;
 
         let sideA, sideB, team1, team2;
         switch (typeof bracket.team1) {
@@ -51,8 +52,14 @@ export default class BracketGroup extends Component {
                     <div className="horizontal-connector" />
                     <div className="vertical-connector" />
                     <div className="match">
-                        <div>{team1}</div>
-                        <div>{team2}</div>
+                        <div>
+                            {team1}
+                            <span>{score[0]}</span>
+                        </div>
+                        <div>
+                            {team2}
+                            <span>{score[1]}</span>
+                        </div>
                     </div>
                 </div>
             </div>
