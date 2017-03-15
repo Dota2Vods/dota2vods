@@ -9,7 +9,14 @@ $line-color: black;
     display: flex;
     align-items: stretch;
 
+    .bracket-group { //Only applies for inner bracket-groups
+        height: 50%;
+        justify-content: right;
+    }
+
     .separator {
+        margin-top: -1px;
+        transform: translateY(1px);
         border-bottom: 1px solid $line-color;
         opacity: 0.5;
     }
