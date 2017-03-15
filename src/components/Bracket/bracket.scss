@@ -11,7 +11,7 @@ $line-color: black;
 
     .bracket-group { //Only applies for inner bracket-groups
         height: 50%;
-        justify-content: right;
+        justify-content: flex-end;
     }
 
     .separator {
