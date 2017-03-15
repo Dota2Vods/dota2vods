@@ -10,8 +10,7 @@ $line-color: black;
     align-items: stretch;
 
     .separator {
-        height: 1px;
-        background-color: $line-color;
+        border-bottom: 1px solid $line-color;
         opacity: 0.5;
     }
 
