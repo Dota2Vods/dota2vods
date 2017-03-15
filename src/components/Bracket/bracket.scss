@@ -1,0 +1,45 @@
+@mixin match-style {
+    background-color: #414141;
+    color:  #ccc;
+}
+$line-color: black;
+
+
+.bracket-group {
+    display: flex;
+    align-items: stretch;
+
+    .separator {
+        height: 1px;
+        background-color: $line-color;
+        opacity: 0.5;
+    }
+
+    .match-holder {
+        display: flex;
+        align-items: center;
+
+        &:not(:first-child) {
+            .horizontal-connector {
+                width: 10px;
+                height: 50%;
+                border: 1px solid $line-color;
+                border-left: 0px;
+            }
+
+            .vertical-connector {
+                width: 10px;
+                height: 1px;
+                background-color: $line-color;
+            }
+        }
+
+        .match {
+            width: 200px;
+            margin: 10px 0px;
+            padding: 3px;
+
+            @include match-style;
+        }
+    }
+}
