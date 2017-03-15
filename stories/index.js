@@ -45,7 +45,7 @@ storiesOf('Bracket', module)
             separated: true,
             team2: {
                 team1: "OG",
-                team2: "The greks",
+                team2: "The greeks",
                 score: [0, 2],
                 done: true
             },
