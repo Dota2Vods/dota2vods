@@ -1,5 +1,21 @@
 import React, { Component } from "react";
 
+function findTeamName(round) {
+    if (typeof round === "string") {
+        return round;
+    }
+
+    if (!round.done) {
+        return "TBD";
+    }
+
+    if (round.score[0] > round.score[0]) {
+        return findTeamName(round.team1);
+    } else {
+        return findTeamName(round.team2);
+    }
+}
+
 export default class BracketGroup extends Component {
     render() {
         const bracket = this.props.bracket;
@@ -11,6 +27,7 @@ export default class BracketGroup extends Component {
                 break;
             case "object":
                 sideA = bracket.team1;
+                team1 = findTeamName(bracket.team1);
                 break;
         }
         switch (typeof bracket.team2) {
@@ -19,6 +36,7 @@ export default class BracketGroup extends Component {
                 break;
             case "object":
                 sideB = bracket.team2;
+                team2 = findTeamName(bracket.team2);
                 break;
         }
 
@@ -33,8 +51,8 @@ export default class BracketGroup extends Component {
                     <div className="horizontal-connector" />
                     <div className="vertical-connector" />
                     <div className="match">
-                        <div>{ team1 || "?" }</div>
-                        <div>{ team2 || "?" }</div>
+                        <div>{team1}</div>
+                        <div>{team2}</div>
                     </div>
                 </div>
             </div>
