@@ -20,18 +20,19 @@ export default () => (
     <Navbar>
         <Navbar.Header>
             <Navbar.Brand>
-                <Link to="/" onClick={onClick}>Dota2Vods.tv</Link>
+                <Link to="/" onClick={onClick} tabIndex="1">Dota2Vods.tv</Link>
             </Navbar.Brand>
             <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
             <Nav bsStyle="pills" pullRight>
-                <RouterNavItem to="/about">About</RouterNavItem>
+                <RouterNavItem to="/about" tabIndex="3">About</RouterNavItem>
             </Nav>
 
             <Navbar.Form>
                 <FormGroup style={{width: "100%", maxWidth: "500px"}}>
-                    <FormControl type="text" placeholder="Search for a tournament" style={{width: "100%"}} />
+                    <FormControl type="text" placeholder="Search for a tournament" tabIndex="2"
+                        style={{width: "100%"}} />
                 </FormGroup>
             </Navbar.Form>
         </Navbar.Collapse>
