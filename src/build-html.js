@@ -1,27 +1,78 @@
+import "ignore-styles";
 import path from "path";
-import { writeFileSync } from "fs";
+import mkdirpTmp from "mkdirp";
+import { writeFile as writeFileTmp } from "fs";
+import React from "react";
+import ReactDOMServer from "react-dom/server";
+import { StaticRouter } from "react-router-dom";
+import Helmet from "react-helmet";
+import { promisify } from "bluebird";
+import { getUrls as getUrlsTmp } from "./sitemap";
+import App from "./App";
+
+const mkdirp = promisify(mkdirpTmp);
+const writeFile = promisify(writeFileTmp);
+const getUrls = promisify(getUrlsTmp);
 
 console.log("Building HTML...");
 
+//Constants
 const buildPath = path.resolve(__dirname, "..", "build");
-const pathToAsset = (htmlFile, assetFile) => path.join(path.relative(path.dirname(htmlFile), buildPath), assetFile);
+const noMatchFile = "404.html";
 
-//Just generate an index.html file for now
-const filePath = path.resolve(buildPath, "index.html");
-const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Dota2Vods</title>
-    <meta charset="utf-8">
+//Helper functions
+const pathToAsset = (htmlFile, assetFile) => {
+    if (path.basename(htmlFile) === noMatchFile) { //We don't know where the 404 file will be embedded
+        return path.join("/", assetFile);
+    }
 
-    <link rel="stylesheet" href="${pathToAsset(filePath, "style.css")}">
-</head>
-<body>
-    <div id="root"></div>
+    return path.join(path.relative(path.dirname(htmlFile), buildPath), assetFile);
+}
 
-    <script src="${pathToAsset(filePath, "bundle.js")}"></script>
-</body>
-</html>`;
-writeFileSync(filePath, html);
 
-console.log("Done!");
+//Go
+getUrls().then(urls => {
+    urls.push(noMatchFile); //Special 404 file
+
+    let filesWritten = 0;
+    const filesToWrite = urls.length;
+
+    for (const url of urls) {
+        let filePath = path.join(buildPath, url);
+        if (path.extname(filePath) !== ".html") {
+            filePath = path.join(filePath, "index.html");
+        }
+
+        let context = {};
+        const reactContent = ReactDOMServer.renderToString(
+            <StaticRouter location={url} context={context}>
+                <App />
+            </StaticRouter>
+        );
+        const head = Helmet.rewind();
+
+        const html = `<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            ${head.title}
+            <meta charset="utf-8">
+
+            <link rel="stylesheet" href="${pathToAsset(filePath, "style.css")}">
+        </head>
+        <body>
+            <div id="root">${reactContent}</div>
+
+            <script src="${pathToAsset(filePath, "bundle.js")}"></script>
+        </body>
+        </html>`;
+
+        mkdirp(path.dirname(filePath)).then(() => writeFile(filePath, html)).then(() => {
+            filesWritten++;
+            console.log(`${filesWritten}/${filesToWrite} - ${path.relative(buildPath, filePath)}`);
+
+            if (filesWritten === filesToWrite) {
+                console.log("Done!");
+            }
+        });
+    }
+});
