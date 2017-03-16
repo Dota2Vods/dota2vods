@@ -14,11 +14,15 @@
   "dependencies": {
     "bluebird": "^3.5.0",
     "bootstrap": "^3.3.7",
+    "html-loader": "^0.4.5",
+    "markdown-loader": "^2.0.0",
+    "marked": "^0.3.6",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.8",
     "react-dom": "^15.4.2",
     "react-helmet": "^5.0.0-beta",
-    "react-router-dom": "^4.0.0"
+    "react-router-dom": "^4.0.0",
+    "require-hacker": "^3.0.0"
   },
   "devDependencies": {
     "@kadira/storybook": "^2.21.0",

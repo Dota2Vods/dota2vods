@@ -42,6 +42,12 @@ const config = {
                 ])
             },
             {
+                test: /\.md$/,
+                use: [
+                    "html-loader", "markdown-loader"
+                ]
+            },
+            {
                 test: /\.(ttf|eot|woff|woff2|svg|jpg|gif|png)$/,
                 loader: "file-loader",
                 options: {

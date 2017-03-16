@@ -1,4 +1,3 @@
-import "ignore-styles";
 import path from "path";
 import mkdirpTmp from "mkdirp";
 import { writeFile as writeFileTmp } from "fs";
@@ -7,6 +6,9 @@ import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import Helmet from "react-helmet";
 import { promisify } from "bluebird";
+
+import "ignore-styles";
+import "./node-require-hacks";
 import { getUrls as getUrlsTmp } from "./sitemap";
 import App from "./App";
 
@@ -28,7 +30,6 @@ const pathToAsset = (htmlFile, assetFile) => {
 
     return path.join(path.relative(path.dirname(htmlFile), buildPath), assetFile);
 }
-
 
 //Go
 getUrls().then(urls => {
