@@ -9,7 +9,7 @@ const config = {
     output: {
         filename: "bundle.js",
         path: path.resolve(__dirname, "build"),
-        publicPath: "/build/"
+        publicPath: "/"
     },
     module: {
         rules: [
@@ -17,6 +17,10 @@ const config = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: "babel-loader"
+            },
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract("css-loader")
             },
             {
                 test: /\.scss$/,
@@ -36,6 +40,14 @@ const config = {
                         }
                     }
                 ])
+            },
+            {
+                test: /\.(ttf|eot|woff|woff2|svg|jpg|gif|png)$/,
+                loader: "file-loader",
+                options: {
+                    outputPath: "assets/",
+                    publicPath: "assets/",
+                }
             }
         ]
     },
