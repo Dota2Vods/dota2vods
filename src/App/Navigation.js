@@ -6,10 +6,12 @@ import OverviewPage from "../pages/Overview";
 import AboutPage from "../pages/About";
 import NoMatchPage from "../pages/NoMatch";
 
+const onClick = e => e.target.blur();
+
 const RouterNavItem = ({to, children}) => (
   <Route path={to} children={({match}) => (
     <li role="presentation" className={match ? 'active' : ''}>
-      <Link to={to}>{children}</Link>
+      <Link to={to} onClick={onClick}>{children}</Link>
     </li>
   )} />
 );
@@ -18,7 +20,7 @@ export default () => (
     <Navbar>
         <Navbar.Header>
             <Navbar.Brand>
-                <Link to="/">Dota2Vods.tv</Link>
+                <Link to="/" onClick={onClick}>Dota2Vods.tv</Link>
             </Navbar.Brand>
             <Navbar.Toggle />
         </Navbar.Header>
