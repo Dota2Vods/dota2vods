@@ -1,3 +1,12 @@
 import React from "react";
+import { connect } from "../json-store";
 
-export default () => <div>Hi :)</div>;
+import TournamentOverview from "../components/TournamentsOverview";
+
+export default () => <div>
+    {connect(<TournamentOverview />, store => {
+        return {
+            data: store.getTournamentsOverview()
+        };
+    })}
+</div>;

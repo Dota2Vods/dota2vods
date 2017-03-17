@@ -23,8 +23,8 @@ export const connect = (componentToConnect, mapProps) => {
         state = {};
 
         store = {
-            getCount: () => {
-                return this.get("count");
+            getTournamentsOverview: () => {
+                return this.get("tournaments-overview");
             }
         };
 
