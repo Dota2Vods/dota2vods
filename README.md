@@ -21,6 +21,7 @@ Development
    git clone https://github.com/dota2vods/dota2vods.git
    cd dota2vods
    npm install
+   npm run build-data #Downloads or updates the tournament data
    npm run build-html #This will build the entry html files in the build folder
    npm run watch #Starts the webpack-dev-server
 ```

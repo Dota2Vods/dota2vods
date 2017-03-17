@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "build": "npm run build-webpack && npm run build-static-storybook && npm run build-html",
+    "build": "npm run build-data && npm run build-webpack && npm run build-static-storybook && npm run build-html",
+    "build-data": "./scripts/update-data.sh",
     "build-webpack": "NODE_ENV=production webpack --progress --hide-modules",
     "build-html": "babel-node src/build-html.js",
     "build-static-storybook": "build-storybook -c .storybook -o build/storybook",
