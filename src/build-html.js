@@ -5,6 +5,8 @@ import React from "react";
 import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import Helmet from "react-helmet";
+import { clearStoreCache } from "./json-store";
+import FileProvider from "./json-store/FileProvider";
 import { promisify } from "bluebird";
 
 import "ignore-styles";
@@ -47,10 +49,13 @@ getUrls().then(urls => {
         let context = {};
         const reactContent = ReactDOMServer.renderToString(
             <StaticRouter location={url} context={context}>
-                <App />
+                <FileProvider dataFolder={path.join(buildPath, "data")}>
+                    <App />
+                </FileProvider>
             </StaticRouter>
         );
         const head = Helmet.rewind();
+        const storeCache = clearStoreCache();
 
         const html = `<!DOCTYPE html>
         <html lang="en">
@@ -64,6 +69,9 @@ getUrls().then(urls => {
         <body>
             <div id="root">${reactContent}</div>
 
+            <script>
+                window.__JSON_STORE_CACHE__ = ${JSON.stringify(storeCache)};
+            </script>
             <script src="${pathToAsset(filePath, "bundle.js")}"></script>
         </body>
         </html>`;
