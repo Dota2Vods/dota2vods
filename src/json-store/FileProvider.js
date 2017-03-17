@@ -7,6 +7,10 @@ export default class FileProvider extends AbstractProvider {
         const dataFolder = this.props.dataFolder;
         const filePath = path.join(dataFolder, jsonFile.replace(".", "")) + ".json";
 
-        return JSON.parse(readFileSync(filePath));
+        try {
+            return JSON.parse(readFileSync(filePath));
+        } catch (error) {
+            return false;
+        }
     }
 }

@@ -5,6 +5,7 @@ export default class ApiProvider extends AbstractProvider {
         const dataUrl = this.props.dataUrl;
         const fileUrl = [dataUrl, jsonFile.replace(".", "")].join("/") + ".json";
 
-        return fetch(fileUrl).then(response => response.json());
+        return fetch(fileUrl).then(response => response.json())
+            .catch(() => false); //Return false on error
     }
 }

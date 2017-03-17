@@ -30,7 +30,7 @@ export const connect = (componentToConnect, mapProps) => {
 
         get(key) {
             //Check cache
-            if (storeCache[key]) {
+            if (typeof storeCache[key] !== "undefined") {
                 return storeCache[key];
             }
 
