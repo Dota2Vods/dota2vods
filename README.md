@@ -1,3 +1,6 @@
+[![GitHub stars](https://img.shields.io/github/stars/dota2vods/dota2vods.svg?style=social&label=Stars)](https://github.com/dota2vods/dota2vods)
+[![GitHub issues](https://img.shields.io/github/issues/dota2vods/dota2vods.svg?style=social)](https://github.com/dota2vods/dota2vods/issues)
+
 [Dota2Vods](https://github.com/dota2vods/dota2vods) is intended to become a website where you can easily access the youtube vods of all major dota tournaments without the hazzle to type the tournament and team names into the youtube search by hand.
 
 However at the moment everything is still in early development and the project is far away from this vision.  
