@@ -1,12 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route, Link } from "react-router-dom";
 import { Navbar, Nav, FormGroup, FormControl } from "react-bootstrap";
+import { connect } from "../json-store";
+import NavSearchBox from "../components/NavSearchBox";
 
-import OverviewPage from "../pages/Overview";
-import AboutPage from "../pages/About";
-import NoMatchPage from "../pages/NoMatch";
-
-const onClick = e => e.target.blur();
+import "./Navigation.scss";
 
 const RouterNavItem = ({to, children}) => (
   <Route path={to} children={({match}) => (
@@ -15,6 +13,8 @@ const RouterNavItem = ({to, children}) => (
     </li>
   )} />
 );
+
+const onClick = e => e.target.blur();
 
 export default () => (
     <Navbar>
@@ -30,10 +30,12 @@ export default () => (
             </Nav>
 
             <Navbar.Form>
-                <FormGroup style={{width: "100%", maxWidth: "500px"}}>
-                    <FormControl type="text" placeholder="Search for a tournament" tabIndex="2"
-                        style={{width: "100%"}} />
-                </FormGroup>
+                {connect(<NavSearchBox tabIndex="2" />, store => {
+                    return {
+                        tournamentList: store.getTournamentList()
+                    };
+                })}
+
             </Navbar.Form>
         </Navbar.Collapse>
     </Navbar>

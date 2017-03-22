@@ -23,6 +23,9 @@ export const connect = (componentToConnect, mapProps) => {
         state = {};
 
         store = {
+            getTournamentList: () => {
+                return this.get("tournament-list");
+            },
             getTournamentsOverview: () => {
                 return this.get("tournaments-overview");
             }
