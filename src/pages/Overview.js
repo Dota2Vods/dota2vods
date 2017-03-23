@@ -4,9 +4,7 @@ import { connect } from "../json-store";
 import TournamentOverview from "../components/TournamentsOverview";
 
 export default () => <div>
-    {connect(<TournamentOverview />, store => {
-        return {
-            data: store.getTournamentsOverview()
-        };
+    {connect(<TournamentOverview />, {
+        data: "tournaments-overview"
     })}
 </div>;

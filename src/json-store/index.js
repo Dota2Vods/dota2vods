@@ -13,7 +13,7 @@ export const clearStoreCache = () => {
     return storeCacheSave;
 }
 
-export const connect = (componentToConnect, mapProps) => {
+export const connect = (componentToConnect, propToJsonFile) => {
     class ConnectHelper extends Component {
         static contextTypes = {
             storeProvider: React.PropTypes.object
@@ -21,15 +21,6 @@ export const connect = (componentToConnect, mapProps) => {
 
         didMount = false;
         state = {};
-
-        store = {
-            getTournamentList: () => {
-                return this.get("tournament-list");
-            },
-            getTournamentsOverview: () => {
-                return this.get("tournaments-overview");
-            }
-        };
 
         get(key) {
             //Check cache
@@ -61,10 +52,8 @@ export const connect = (componentToConnect, mapProps) => {
                 throw new Error("No store provider found!");
             }
 
-            const mappedProps = mapProps(this.store);
-
-            Object.keys(mappedProps).forEach(propName => {
-                const prop = mappedProps[propName];
+            Object.keys(propToJsonFile).forEach(propName => {
+                const prop = this.get(propToJsonFile[propName]);
                 if (!prop.then) { //No promise -> set state directely in constructor
                     this.state[propName] = prop;
                     return;

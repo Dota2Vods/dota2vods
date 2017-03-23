@@ -30,10 +30,8 @@ export default () => (
             </Nav>
 
             <Navbar.Form>
-                {connect(<NavSearchBox tabIndex="2" />, store => {
-                    return {
-                        tournamentList: store.getTournamentList()
-                    };
+                {connect(<NavSearchBox tabIndex="2" />, {
+                    tournamentList: "tournament-list"
                 })}
 
             </Navbar.Form>
