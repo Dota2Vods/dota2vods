@@ -11,6 +11,12 @@ const config = {
         path: path.resolve(__dirname, "build"),
         publicPath: "/"
     },
+    devServer: {
+         contentBase: "build/",
+         historyApiFallback: {
+             index: "/404.html"
+         }
+    },
     module: {
         rules: [
             {
