@@ -9,7 +9,8 @@ import "./App.scss";
 
 import OverviewPage from "../pages/Overview";
 import AboutPage from "../pages/About";
-import NoMatchPage from "../pages/NoMatch";
+import TournamentPage from "../pages/Tournament";
+import Error404Page from "../pages/Error404";
 
 export default class App extends Component {
     render() {
@@ -23,7 +24,8 @@ export default class App extends Component {
                     <Switch>
                         <Route exact path="/" component={OverviewPage} />
                         <Route exact path="/about" component={AboutPage} />
-                        <Route component={NoMatchPage} />
+                        <Route exact strict path="/404.html" component={Error404Page} />
+                        <Route path="/:tournamentId" component={TournamentPage} />
                     </Switch>
                 </Grid>
             </div>

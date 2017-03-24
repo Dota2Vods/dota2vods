@@ -22,11 +22,11 @@ console.log("Building HTML...");
 
 //Constants
 const buildPath = path.resolve(__dirname, "..", "build");
-const noMatchFile = "404.html";
+const error404File = "404.html";
 
 //Helper functions
 const pathToAsset = (htmlFile, assetFile) => {
-    if (path.basename(htmlFile) === noMatchFile) { //We don't know where the 404 file will be embedded
+    if (path.basename(htmlFile) === error404File) { //We don't know where the 404 file will be embedded
         return path.join("/", assetFile);
     }
 
@@ -35,7 +35,7 @@ const pathToAsset = (htmlFile, assetFile) => {
 
 //Go
 getUrls().then(urls => {
-    urls.push(noMatchFile); //Special 404 file
+    urls.push("/" + error404File); //Special 404 file
 
     let filesWritten = 0;
     const filesToWrite = urls.length;
