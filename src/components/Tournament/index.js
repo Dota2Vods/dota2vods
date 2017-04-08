@@ -13,8 +13,8 @@ export default ({ tournament }) => {
 
     return (
         <div>
-            <Helmet title={tournament.name} />
-            {tournament.name}
+            <Helmet title={tournament.meta.name} />
+            {tournament.meta.name}
         </div>
     );
 };
