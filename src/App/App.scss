@@ -1,0 +1,6 @@
+//Global webkit fullscreen fix
+:-webkit-full-screen {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+}
