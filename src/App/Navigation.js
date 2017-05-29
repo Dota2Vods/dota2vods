@@ -25,7 +25,7 @@ export default () => (
             <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-            <Nav bsStyle="pills" pullRight>
+            <Nav pullRight>
                 <RouterNavItem to="/about" tabIndex="3">About</RouterNavItem>
             </Nav>
 
