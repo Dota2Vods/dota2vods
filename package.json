@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@kadira/storybook": "^2.21.0",
+    "assets-webpack-plugin": "^3.5.1",
     "babel-cli": "^6.24.0",
     "babel-core": "^6.24.0",
     "babel-loader": "^6.4.0",
@@ -34,6 +35,7 @@
     "babel-preset-latest": "^6.24.0",
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-2": "^6.22.0",
+    "clean-webpack-plugin": "^0.1.16",
     "css-loader": "^0.27.3",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.1",

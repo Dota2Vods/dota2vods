@@ -5,6 +5,7 @@ import React from "react";
 import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import Helmet from "react-helmet";
+import getAssetPaths from "./getAssetPaths";
 import { clearStoreCache } from "./json-store";
 import FileProvider from "./json-store/FileProvider";
 import { promisify } from "bluebird";
@@ -22,16 +23,8 @@ console.log("Building HTML...");
 
 //Constants
 const buildPath = path.resolve(__dirname, "..", "build");
+const assetPaths = getAssetPaths(buildPath);
 const error404File = "404.html";
-
-//Helper functions
-const pathToAsset = (htmlFile, assetFile) => {
-    if (path.basename(htmlFile) === error404File) { //We don't know where the 404 file will be embedded
-        return path.join("/", assetFile);
-    }
-
-    return path.join(path.relative(path.dirname(htmlFile), buildPath), assetFile);
-}
 
 //Go
 getUrls().then(urls => {
@@ -64,7 +57,7 @@ getUrls().then(urls => {
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            <link rel="stylesheet" href="${pathToAsset(filePath, "style.css")}">
+            <link rel="stylesheet" href="${assetPaths["css"]}">
         </head>
         <body>
             <div id="root">${reactContent}</div>
@@ -72,7 +65,7 @@ getUrls().then(urls => {
             <script>
                 window.__JSON_STORE_CACHE__ = ${JSON.stringify(storeCache)};
             </script>
-            <script src="${pathToAsset(filePath, "bundle.js")}"></script>
+            <script src="${assetPaths["js"]}"></script>
         </body>
         </html>`;
 

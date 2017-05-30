@@ -1,18 +1,39 @@
-var path = require('path'),
-    webpack = require("webpack"),
-    ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require("path"),
+      webpack = require("webpack"),
+      CleanWebpackPlugin = require("clean-webpack-plugin"),
+      ExtractTextPlugin = require("extract-text-webpack-plugin"),
+      AssetsPlugin = require("assets-webpack-plugin");
 
+const buildPath = path.resolve(__dirname, "build");
+const assetsFolder = "/assets/";
+const assetsPath = path.join(buildPath, assetsFolder);
 const production = process.env["NODE_ENV"] === "production";
+
+if (production) {
+    //Use hashes as asset filenames in production
+    var assetFileNames = {
+        "js": "[chunkhash].js",
+        "css": "[contenthash].css"
+    }
+} else {
+    //Otherwise extract the old asset filenames so we don't need to rebuild the html files for every change
+    const assetPaths = require("./src/getAssetPaths")(buildPath);
+
+    var assetFileNames = {};
+    Object.keys(assetPaths).map(assetType => {
+        assetFileNames[assetType] = assetPaths[assetType].substr(assetsFolder.length);
+    });
+}
 
 const config = {
     entry: ["babel-polyfill", path.resolve(__dirname, "src", "index.js")],
     output: {
-        filename: "bundle.js",
-        path: path.resolve(__dirname, "build"),
-        publicPath: "/"
+        filename: assetFileNames["js"],
+        path: assetsPath,
+        publicPath: assetsFolder
     },
     devServer: {
-         contentBase: "build/",
+         contentBase: buildPath,
          historyApiFallback: {
              index: "/404.html"
          }
@@ -55,11 +76,7 @@ const config = {
             },
             {
                 test: /\.(ttf|eot|woff|woff2|svg|jpg|gif|png)$/,
-                loader: "file-loader",
-                options: {
-                    outputPath: "assets/",
-                    publicPath: "assets/",
-                }
+                loader: "file-loader"
             }
         ]
     },
@@ -68,7 +85,7 @@ const config = {
         new webpack.NoEmitOnErrorsPlugin(),
         //Extract css
         new ExtractTextPlugin({
-            filename: 'style.css',
+            filename: assetFileNames["css"],
             allChunks: true
         })
     ],
@@ -89,9 +106,16 @@ if (production) {
                 NODE_ENV: JSON.stringify("production")
             }
         }),
+        //Remove old assets
+        new CleanWebpackPlugin(assetsPath),
         // Minify javascript
         new webpack.optimize.UglifyJsPlugin({
             sourceMap: true
+        }),
+        //Save asset paths
+        new AssetsPlugin({
+            filename: "paths.json",
+            path: assetsPath
         })
     );
 }
