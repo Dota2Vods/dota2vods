@@ -1,15 +1,17 @@
 #!/bin/bash
-dataFolder="$(dirname $0)/../build/data"
+projectFolder=$(cd "$(dirname $0)/../"; pwd)
+dataSourceFolder="${projectFolder}/data"
+dataBuildFolder="${projectFolder}/build/data"
 dataRepo="https://github.com/dota2vods/tournament-data.git"
 
 # Update
-if [ -d $dataFolder ]; then
-    cd $dataFolder
+if [ -d $dataSourceFolder ]; then
+    cd $dataSourceFolder
     git pull
 else
-    git clone $dataRepo $dataFolder
-    cd $dataFolder
+    git clone $dataRepo $dataSourceFolder
+    cd $dataSourceFolder
 fi
 
 # Build
-make
+make BUILD_FOLDER=$dataBuildFolder
