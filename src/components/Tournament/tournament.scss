@@ -1,0 +1,24 @@
+.tournament {
+    .tournament-meta-entry {
+        width: 300px;
+        padding: 3px 15px;
+
+        &:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.075);
+        }
+
+        > :first-child {
+            float: left;
+            font-weight: bold;
+            width: 115px;
+        }
+
+        > :not(:first-child) {
+            margin-left: 120px;
+        }
+    }
+
+    .tournament-info-sources {
+        border-top: 1px solid rgba(49, 112, 143, 0.3);
+    }
+}
