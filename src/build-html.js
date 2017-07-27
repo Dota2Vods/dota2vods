@@ -35,7 +35,9 @@ getUrls().then(urls => {
 
     for (const url of urls) {
         let filePath = path.join(buildPath, url);
-        if (path.extname(filePath) !== ".html") {
+
+        //Create `index.html` if we have a folder
+        if (filePath.endsWith("/")) {
             filePath = path.join(filePath, "index.html");
         }
 
