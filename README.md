@@ -23,16 +23,16 @@ Development
 ```shell
    git clone https://github.com/dota2vods/dota2vods.git
    cd dota2vods
-   npm install
-   npm run build-data #Downloads or updates the tournament data
-   npm run build-html #This will build the entry html files in the build folder
-   npm run watch #Starts the webpack-dev-server
+   make install
+   make build-data #Downloads or updates the tournament data
+   make build-html #This will build the entry html files in the build folder
+   make watch #Starts the webpack-dev-server
 ```
 
 ### Build
-Execute `npm run build` to run all build commands (this is what gets called before a deploy).  
-Take a look at the `package.json` to see a list of all available sub-build commands.
+Execute `make build` to run all build commands (this is what gets called before a deploy).  
+Take a look at the `Makefile` to see a list of all available sub-build commands.
 
 ### Storybook
 This project uses [React Storybook](https://getstorybook.io/) to develop some of it's components.  
-Execute `npm run storybook` to start the storybook in watch mode.
+Execute `make watch-storybook` to start the storybook in watch mode.
