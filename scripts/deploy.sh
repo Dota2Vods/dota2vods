@@ -10,6 +10,6 @@ echo "Syncing build folder with s3 bucket..."
 #All other files should be checked for updates on every request ("no-cache")
 ~/.local/bin/s3cmd sync --reduced-redundancy --acl-public --delete-removed --no-preserve \
     --no-mime-magic --guess-mime-type --add-header="Cache-Control: public, max-age=31536000, no-cache" \
-    --exclude=assets/** --exclude=.git/* \
+    --exclude=assets/** \
     build/ s3://dota2vods/
 echo "Done!"
