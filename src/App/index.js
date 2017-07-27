@@ -23,7 +23,7 @@ export default class App extends Component {
                 <Grid>
                     <Switch>
                         <Route exact path="/" component={OverviewPage} />
-                        <Route exact path="/about" component={AboutPage} />
+                        <Route exact strict path="/about" component={AboutPage} />
                         <Route exact strict path="/404.html" component={Error404Page} />
                         <Route path="/:tournamentId" component={TournamentPage} />
                     </Switch>

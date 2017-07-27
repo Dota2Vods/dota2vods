@@ -26,7 +26,7 @@ export default () => (
         </Navbar.Header>
         <Navbar.Collapse>
             <Nav pullRight>
-                <RouterNavItem to="/about" tabIndex="3">About</RouterNavItem>
+                <RouterNavItem exact strict to="/about" tabIndex="3">About</RouterNavItem>
             </Nav>
 
             <Navbar.Form>
