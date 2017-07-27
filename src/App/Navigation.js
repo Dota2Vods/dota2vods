@@ -6,8 +6,8 @@ import NavSearchBox from "../components/NavSearchBox";
 
 import "./Navigation.scss";
 
-const RouterNavItem = ({to, children}) => (
-  <Route path={to} children={({match}) => (
+const RouterNavItem = ({exact, strict, to, children}) => (
+  <Route exact={exact} strict={strict} path={to} children={({match}) => (
     <li role="presentation" className={match ? 'active' : ''}>
       <Link to={to} onClick={onClick}>{children}</Link>
     </li>
