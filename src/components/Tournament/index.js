@@ -1,5 +1,6 @@
 import React from "react";
 import Helmet from "react-helmet";
+import { Row, Col } from "react-bootstrap";
 import Error404Page from "../../pages/Error404";
 import MetaBoxes from "./MetaBoxes";
 
@@ -16,15 +17,16 @@ export default ({ tournament }) => {
         <div className="tournament">
             <Helmet title={tournament.name} />
 
-            <div className="pull-right">
-                <MetaBoxes tournamentName={tournament.name} metaData={tournament.meta} />
-            </div>
-
-            <div className="page-header" style={{
-                marginRight: "312px"
-            }}>
-                <h2>{tournament.name}</h2>
-            </div>
+            <Row>
+                <Col md={4} mdPush={8}>
+                    <MetaBoxes tournamentName={tournament.name} metaData={tournament.meta} />
+                </Col>
+                <Col md={8} mdPull={4}>
+                    <div className="page-header">
+                        <h2>{tournament.name}</h2>
+                    </div>
+                </Col>
+            </Row>
         </div>
     );
 };
