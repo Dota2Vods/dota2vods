@@ -24,22 +24,53 @@ console.log("Building HTML...");
 //Constants
 const buildPath = path.resolve(__dirname, "..", "build");
 const assetPaths = getAssetPaths(buildPath);
-const error404File = "404.html";
+const blankFileUrl = "/200.html";
 
 //Go
 getUrls().then(urls => {
-    urls.push("/" + error404File); //Special 404 file
-
-    let filesWritten = 0;
-    const filesToWrite = urls.length;
-
-    for (const url of urls) {
+    function getFilePathByUrl(url) {
         let filePath = path.join(buildPath, url);
 
         //Create `index.html` if we have a folder
         if (filePath.endsWith("/")) {
             filePath = path.join(filePath, "index.html");
         }
+
+        return filePath;
+    }
+
+    let filesWritten = 0;
+    const filesToWrite = urls.length + 1; //` + 1` because blank file is not in the url list
+    function writeContent(filePath, html) {
+        mkdirp(path.dirname(filePath)).then(() => writeFile(filePath, html)).then(() => {
+            filesWritten++;
+            console.log(`${filesWritten}/${filesToWrite} - ${path.relative(buildPath, filePath)}`);
+
+            if (filesWritten === filesToWrite) {
+                console.log("Done!");
+            }
+        });
+    }
+
+    //Write special blank file
+    //(Gets served if no file was found on the server and will then get populated by the client side react code)
+    writeContent(getFilePathByUrl(blankFileUrl), "<!DOCTYPE html>" + ReactDOMServer.renderToStaticMarkup(
+        <html lang="en">
+            <head>
+                <meta charSet="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="stylesheet" href={assetPaths["css"]} />
+            </head>
+            <body>
+                <div id="root" />
+                <script src={assetPaths["js"]} />
+            </body>
+        </html>
+    ));
+
+    //Go over urls
+    for (const url of urls) {
+        const filePath = getFilePathByUrl(url);
 
         let context = {};
         const reactContent = ReactDOMServer.renderToString(
@@ -71,13 +102,6 @@ getUrls().then(urls => {
         </body>
         </html>`;
 
-        mkdirp(path.dirname(filePath)).then(() => writeFile(filePath, html)).then(() => {
-            filesWritten++;
-            console.log(`${filesWritten}/${filesToWrite} - ${path.relative(buildPath, filePath)}`);
-
-            if (filesWritten === filesToWrite) {
-                console.log("Done!");
-            }
-        });
+        writeContent(filePath, html);
     }
 });

@@ -35,7 +35,7 @@ const config = {
     devServer: {
          contentBase: buildPath,
          historyApiFallback: {
-             index: "/404.html"
+             index: "/200.html"
          }
     },
     module: {
