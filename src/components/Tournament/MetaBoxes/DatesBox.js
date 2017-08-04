@@ -1,6 +1,6 @@
 import React from "react";
 
-export default ({tournamentName, startDate, endDate}) => (
+export default ({ tournamentName, startDate, endDate}) => (
     <div className="panel panel-default">
         <div className="panel-heading">
             <h3 className="panel-title">

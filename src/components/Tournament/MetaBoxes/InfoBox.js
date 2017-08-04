@@ -12,7 +12,7 @@ function linkToLabel(link) {
     return hostnameToLabel[hostname] || hostname;
 }
 
-export default ({info, infoSources}) => (
+export default ({ info, infoSources}) => (
     <div className="panel panel-default">
         <div className="panel-heading">
             <h3 className="panel-title">
