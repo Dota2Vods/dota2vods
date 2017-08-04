@@ -3,8 +3,9 @@ import Helmet from "react-helmet";
 import { Row, Col } from "react-bootstrap";
 import Error404Page from "../../pages/Error404";
 import MetaBoxes from "./MetaBoxes";
+import StageTabsNavigation from "./StageTabsNavigation";
 
-export default ({ tournament }) => {
+export default ({ tournamentId, tournament }) => {
     if (typeof tournament === "undefined") {
         return <div>Loading...</div>
     }
@@ -12,6 +13,8 @@ export default ({ tournament }) => {
     if (tournament === false) {
         return <Error404Page />;
     }
+
+    const baseUrl = "/" + tournamentId + "/";
 
     return (
         <div className="tournament">
@@ -25,6 +28,8 @@ export default ({ tournament }) => {
                     <div className="page-header">
                         <h2>{tournament.name}</h2>
                     </div>
+
+                    <StageTabsNavigation baseUrl={baseUrl} stages={tournament.stages} />
                 </Col>
             </Row>
         </div>
