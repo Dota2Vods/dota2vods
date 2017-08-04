@@ -13,13 +13,13 @@ function linkToLabel(link) {
 }
 
 export default ({ info, infoSources}) => (
-    <div className="panel panel-default">
+    <div className="meta-box panel panel-default">
         <div className="panel-heading">
             <h3 className="panel-title">
                 Information
             </h3>
         </div>
-        <div className="panel-body" style={{padding: "0px"}}>
+        <div className="panel-body">
             {Object.keys(info).map(label => (
                 <div key={label} className="tournament-meta-entry">
                     <div>{label}:</div>
