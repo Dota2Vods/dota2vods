@@ -1,9 +1,5 @@
 const testFunctions = {
-    findAcronymMatches(tournamentName, value, originalValue) {
-        if (originalValue.toUpperCase() !== originalValue) { //Only handle upper case acronyms
-            return false;
-        }
-
+    findAcronymMatches(tournamentName, value) {
         let matches = [];
 
         const match = value.match(/^([a-zA-Z]+)\s*(\d*)$/);
@@ -105,7 +101,7 @@ export default (casedTournamentName, casedValue) => {
 
     let sortIndex = 0;
     for (const testFunction of Object.values(testFunctions)) {
-        const matches = testFunction(tournamentName, value, casedValue);
+        const matches = testFunction(tournamentName, value);
         if (matches !== false) {
             return {
                 sortIndex,
