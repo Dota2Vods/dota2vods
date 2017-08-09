@@ -36,6 +36,14 @@ const config = {
          contentBase: buildPath,
          historyApiFallback: {
              index: "/200.html"
+         },
+         staticOptions: {
+             setHeaders: (res, filePath, stat) => {
+                 //Set content-type to text/html for files with no extension
+                 if (path.basename(filePath).indexOf(".") < 0) {
+                     res.set("Content-type", "text/html");
+                 }
+             }
          }
     },
     module: {
