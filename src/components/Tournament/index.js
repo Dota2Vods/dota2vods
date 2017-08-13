@@ -63,10 +63,6 @@ class Tournament extends Component {
             <div className="tournament">
                 <Helmet title={pageTitle} />
 
-                <Route path={this.baseUrl + "#test"} render={() => (
-                    <div>Hi</div>
-                )} />
-
                 <Row>
                     <Col md={4} mdPush={8}>
                         <MetaBoxes tournamentName={tournament.name} metaData={tournament.meta} />
