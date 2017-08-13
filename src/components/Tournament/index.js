@@ -1,63 +1,31 @@
-import React, { Component } from "react";
+import React from "react";
 import Helmet from "react-helmet";
-import { Route, matchPath, withRouter } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import Error404Page from "../../pages/Error404";
 import MetaBoxes from "./MetaBoxes";
 import StageTabsNavigation from "./StageTabsNavigation";
 
-class Tournament extends Component {
-    state = {};
-    baseUrl;
-
-    updateSelectedStage({ location: { pathname }, tournament: { stagesOrder, defaultStage } }) {
-        let selectedStage = defaultStage;
-        for (let stage of stagesOrder) {
-            if (matchPath(pathname, {
-                exact: true,
-                path: this.baseUrl + stage
-            })) {
-                selectedStage = stage;
-                break;
-            }
-        }
-
-        this.setState({
-            selectedStage
-        });
+export default ({ tournamentId, tournament }) => {
+    if (typeof tournament === "undefined") {
+        return <div>Loading...</div>
     }
 
-    componentWillMount() {
-        const { tournamentId, tournament} = this.props;
-
-        this.baseUrl = "/" + tournamentId + "/";
-
-        //If we already have the tournament prop on mount, update the selected stage
-        if (tournament) {
-            this.updateSelectedStage(this.props);
-        }
+    if (tournament === false) {
+        return <Error404Page />;
     }
 
-    componentWillReceiveProps(nextProps) {
-        //If we received the tournament prop, update the selected stage
-        if(nextProps.tournament) {
-            this.updateSelectedStage(nextProps);
-        }
-    }
+    const baseUrl = "/" + tournamentId + "/";
 
-    render() {
-        const { tournamentId, tournament } = this.props;
-        const { selectedStage } = this.state;
+    return <Route exact path={baseUrl + ":selectedStage?"} children={({ match }) => {
+        const selectedStage = match.params.selectedStage ? match.params.selectedStage : tournament.defaultStage;
+        const selectedStageData = tournament.stages[selectedStage];
 
-        if (typeof tournament === "undefined") {
-            return <div>Loading...</div>
-        }
-
-        if (tournament === false) {
+        if (!selectedStageData) {
             return <Error404Page />;
         }
 
-        const pageTitle = `${tournament.name} - ${tournament.stages[selectedStage].name}`;
+        const pageTitle = `${tournament.name} - ${selectedStageData.name}`;
 
         return (
             <div className="tournament">
@@ -72,13 +40,11 @@ class Tournament extends Component {
                             <h2>{pageTitle}</h2>
                         </div>
 
-                        <StageTabsNavigation baseUrl={this.baseUrl} stages={tournament.stages}
+                        <StageTabsNavigation baseUrl={baseUrl} stages={tournament.stages}
                             stagesOrder={tournament.stagesOrder} selectedStage={selectedStage} />
                     </Col>
                 </Row>
             </div>
         );
-    }
+    }} />
 }
-
-export default withRouter(Tournament);
