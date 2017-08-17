@@ -5,6 +5,7 @@ import { Row, Col } from "react-bootstrap";
 import Error404Page from "../../pages/Error404";
 import MetaBoxes from "./MetaBoxes";
 import StageTabsNavigation from "./StageTabsNavigation";
+import GroupTables from "./GroupTables";
 
 export default ({ tournamentId, tournament }) => {
     if (typeof tournament === "undefined") {
@@ -25,6 +26,7 @@ export default ({ tournamentId, tournament }) => {
             return <Error404Page />;
         }
 
+        const selectedStageType = selectedStageData.type;
         const pageTitle = `${tournament.name} - ${selectedStageData.name}`;
 
         return (
@@ -42,6 +44,10 @@ export default ({ tournamentId, tournament }) => {
 
                         <StageTabsNavigation baseUrl={baseUrl} stages={tournament.stages}
                             stagesOrder={tournament.stagesOrder} selectedStage={selectedStage} />
+
+                        {selectedStageType === "groups" && (
+                            <GroupTables stageData={selectedStageData} />
+                        )}
                     </Col>
                 </Row>
             </div>

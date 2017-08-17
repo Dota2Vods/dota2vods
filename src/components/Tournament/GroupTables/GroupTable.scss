@@ -1,0 +1,17 @@
+.group-table {
+    border: 1px solid #7bcef7;
+    border-radius: 10px 10px 5px 5px;
+    border-collapse: separate;
+    overflow: hidden;
+
+    thead > tr > th {
+        background-color: #7bcef7;
+        border-bottom: 0px;
+    }
+
+    tbody > tr {
+        td:nth-child(2) {
+            width: 100%;
+        }
+    }
+}
