@@ -19,6 +19,10 @@ export default ({ tournamentId, tournament }) => {
     const baseUrl = "/" + tournamentId + "/";
 
     return <Route exact path={baseUrl + ":selectedStage?"} children={({ match }) => {
+        if (match === null) {
+            return <Error404Page />;
+        }
+
         const selectedStage = match.params.selectedStage ? match.params.selectedStage : tournament.defaultStage;
         const selectedStageData = tournament.stages[selectedStage];
 
