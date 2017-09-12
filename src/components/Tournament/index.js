@@ -31,7 +31,7 @@ export default ({ tournamentId, tournament }) => {
         }
 
         const selectedStageType = selectedStageData.type;
-        const pageTitle = `${tournament.name} - ${selectedStageData.name}`;
+        const pageTitle = tournament.name + (match.params.selectedStage ? " - " + selectedStageData.name : "");
 
         return (
             <div className="tournament">
