@@ -9,7 +9,7 @@ function findTeamName(round) {
         return "TBD";
     }
 
-    if (round.score[0] > round.score[0]) {
+    if (round.score[0] > round.score[1]) {
         return findTeamName(round.team1);
     } else {
         return findTeamName(round.team2);
