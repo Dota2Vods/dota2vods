@@ -79,8 +79,8 @@ export default class VodPlayer extends Component {
                       Our custom controls would overlap with the original youtube logo so we move the youtube provided
                       one out of sight if they are enabled. (CustomControls has it's own YouTube logo)
                     */
-                    left: (controlsEnabled ? "-100px" : null),
-                    width: (controlsEnabled ? "calc(100% + 200px)": "100%"),
+                    left: (controlsEnabled ? "-126px" : null),
+                    width: (controlsEnabled ? "calc(100% + 252px)": "100%"),
                     height: "100%"
                 }}>
                     <YouTubePlayerWrapper
