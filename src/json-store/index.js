@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 let storeCache = {};
 if (typeof window !== "undefined" && window.__JSON_STORE_CACHE__) {
@@ -16,7 +17,7 @@ export const clearStoreCache = () => {
 export const connect = (componentToConnect, propToJsonFile) => {
     class ConnectHelper extends Component {
         static contextTypes = {
-            storeProvider: React.PropTypes.object
+            storeProvider: PropTypes.object
         };
 
         didMount = false;

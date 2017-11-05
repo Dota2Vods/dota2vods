@@ -4,7 +4,15 @@ import { BrowserRouter as Router } from "react-router-dom";
 import ApiProvider from "./json-store/ApiProvider";
 import App from "./App";
 
-ReactDOM.render(
+const rootElement = document.getElementById("root");
+let renderFunction = ReactDOM.hydrate;
+
+if (!rootElement.firstChild) {
+    //If root element is empty, use `render()` instead
+    renderFunction = ReactDOM.render;
+}
+
+renderFunction(
     (
         <Router>
             <ApiProvider dataUrl="/data">
@@ -12,5 +20,5 @@ ReactDOM.render(
             </ApiProvider>
         </Router>
     ),
-    document.getElementById("root")
+    rootElement
 );

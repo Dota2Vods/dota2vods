@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 export default class AbstractProvider extends Component {
     static childContextTypes = {
-        storeProvider: React.PropTypes.object
+        storeProvider: PropTypes.object
     };
 
     getChildContext() {
