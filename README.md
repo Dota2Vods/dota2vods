@@ -25,7 +25,7 @@ Development
    cd dota2vods
    make install
    make build-data #Downloads or updates the tournament data
-   make build-html #This will build the entry html files in the build folder
+   make build-html #Builds all entry html files and saves them in a json file used by the dev-server
    make watch #Starts the webpack-dev-server
 ```
 

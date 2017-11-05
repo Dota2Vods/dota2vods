@@ -34,16 +34,28 @@ const config = {
     },
     devServer: {
          contentBase: buildPath,
-         historyApiFallback: {
-             index: "/200.html"
+         before: app => {
+             //Disable directory indexing (index option seems not to work without the physical file)
+             app.use((req, res, next) => {
+                if (req.url.endsWith("/")) {
+                    req.url += "index.html";
+                }
+                next();
+             });
          },
-         staticOptions: {
-             setHeaders: (res, filePath, stat) => {
-                 //Set content-type to text/html for files with no extension
-                 if (path.basename(filePath).indexOf(".") < 0) {
-                     res.set("Content-type", "text/html");
-                 }
-             }
+         after: app => {
+            const fileStore = require(path.join(buildPath, "_html-pages.json"));
+            console.log("File store loaded!");
+            const fallbackResponse = fileStore["200.html"];
+
+            app.use((req, res) => {
+                const filePath = req.url.substr(1);
+                if (fileStore[filePath]) {
+                    res.end(fileStore[filePath]);
+                } else {
+                    res.end(fallbackResponse);
+                }
+            });
          }
     },
     module: {
