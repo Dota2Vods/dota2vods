@@ -72,10 +72,6 @@ $controls-text-hover-color: lighten($controls-text-color, 10%);
 
         svg {
             fill: $controls-text-color;
-
-            .ytp-svg-fill-logo-tube-text {
-                fill: none;
-            }
         }
 
         &:hover {
@@ -83,14 +79,6 @@ $controls-text-hover-color: lighten($controls-text-color, 10%);
 
             svg {
                 fill: $controls-text-hover-color;
-
-                .ytp-svg-fill-logo-tube-text {
-                    fill: $controls-text-color;
-                }
-
-                .ytp-svg-fill-logo-tube-lozenge {
-                    fill: #f12b24;
-                }
             }
         }
     }
